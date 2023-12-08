@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TrxTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,13 @@ Route::group([
     ], function() {
         Route::post('logout', [AuthController::class,'logout']);
     });
+});
+
+Route::group([
+    'prefix' => 'trx-type-management',
+    'middleware' => 'auth:api'
+],function(){
+    Route::post('create',[TrxTypeController::class,'createTrxType']);
+    Route::put('update',[TrxTypeController::class,'updateTrxType']);
+    Route::delete('delete',[TrxTypeController::class,'deleteTrxType']);
 });
